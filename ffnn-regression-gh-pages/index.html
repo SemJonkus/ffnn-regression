@@ -1,0 +1,72 @@
+<!-- filepath: ffnn-regression-gh-pages/index.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>FFNN Regression - Deep Learning Aufgabe</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Regression mit FFNN - EA2 </h1>
+
+  <section>
+    <h2>R1) Die Datensätze</h2>
+    <div class="container">
+      <div class="column">
+        <h3>Ohne Rauschen</h3>
+        <canvas id="plotClean" class="chart-hover"></canvas>
+      </div>
+      <div class="column">
+        <h3>Mit Rauschen</h3>
+        <canvas id="plotNoisy" class="chart-hover"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>R2) Modellvorhersage - Unverrauschte Daten - Epochen: 200</h2>
+    <div class="container">
+      <div class="column">
+        <h3>Trainingsdaten</h3>
+        <canvas id="predUnverrauschtTrain" class="chart-hover"></canvas>
+      </div>
+      <div class="column">
+        <h3>Testdaten</h3>
+        <canvas id="predUnverrauschtTest" class="chart-hover"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>R3) Modellvorhersage - Best-Fit (verrauschte Daten) - Epochen: 100 </h2>
+    <div class="container">
+      <div class="column">
+        <h3>Trainingsdaten</h3>
+        <canvas id="predBestFitTrain" class="chart-hover"></canvas>
+      </div>
+      <div class="column">
+        <h3>Testdaten</h3>
+        <canvas id="predBestFitTest" class="chart-hover"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>R4) Modellvorhersage - Over-Fit (verrauschte Daten) - Epochen: 1000</h2>
+    <div class="container">
+      <div class="column">
+        <h3>Trainingsdaten</h3>
+        <canvas id="predOverFitTrain" class="chart-hover"></canvas>
+      </div>
+      <div class="column">
+        <h3>Testdaten</h3>
+        <canvas id="predOverFitTest" class="chart-hover"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>FFNN Regression - Deep Learning Aufgabe</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Regression mit FFNN - EA2 </h1>
+
+
+  <section>
+    <h2>R1) Die Datensätze</h2>
+    <div class="container">
+      <div class="column">
+        <h3>Ohne Rauschen</h3>
+        <canvas id="plotClean" class="chart-hover"></canvas>
+      </div>
+      <div class="column">
+        <h3>Mit Rauschen</h3>
+        <canvas id="plotNoisy" class="chart-hover"></canvas>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>R2) Modellvorhersage - Unverrauschte Daten - Epochen: 200</h2>
+    <div class="container">
+      <div class="column">
+        <h3>Trainingsdaten</h3>
+        <canvas id="predUnverrauschtTrain" class="chart-hover"></canvas>
+      </div>
+      <div class="column">
+        <h3>Testdaten</h3>
+        <canvas id="predUnverrauschtTest" class="chart-hover"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>R3) Modellvorhersage - Best-Fit (verrauschte Daten) - Epochen: 100 </h2>
+    <div class="container">
+      <div class="column">
+        <h3>Trainingsdaten</h3>
+        <canvas id="predBestFitTrain" class="chart-hover"></canvas>
+      </div>
+      <div class="column">
+        <h3>Testdaten</h3>
+        <canvas id="predBestFitTest" class="chart-hover"></canvas>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>R4) Modellvorhersage - Over-Fit (verrauschte Daten) - Epochen: 1000</h2>
+    <div class="container">
+      <div class="column">
+        <h3>Trainingsdaten</h3>
+        <canvas id="predOverFitTrain" class="chart-hover"></canvas>
+      </div>
+      <div class="column">
+        <h3>Testdaten</h3>
+        <canvas id="predOverFitTest" class="chart-hover"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <script src="main.js"></script>
+
+<section>
+  <div class="container">
+    <div class="column" style="max-width:700px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 2rem 2.5rem; margin-bottom: 2rem;">
+      <h2 style="text-align:center;">Diskussion</h2>
+      <div style="text-align:left;">
+        <p>
+          Die Ergebnisse zeigen deutlich, wie ein Feed-Forward Neural Network (FFNN) eine unbekannte mathematische Funktion approximieren kann. Auf dem unverrauschten Datensatz konnte das Modell die Ground-Truth-Funktion präzise lernen, was sich in (meist) nahezu identischen Loss-Werten für Training und Test widerspiegelt. Das belegt, dass ohne Störungen im Datensatz Overfitting nicht auftritt, da das Modell nur das echte funktionale Verhalten lernt. Beim Einsatz verrauschter Daten wurde das Modell weiter getestet: Das Best-Fit-Modell zeigte, dass mit einer begrenzten Anzahl an Epochen eine gute Generalisierung möglich ist, der Test-Loss blieb trotz Rauschen relativ niedrig. Das Overfit-Modell hingegen wurde bewusst übertrainiert, was zu einer klaren Überanpassung führte: Der Trainings-Loss war zwar sehr gering, der Test-Loss jedoch deutlich höher. Dieser Unterschied zeigt den klassischen Overfitting-Effekt, bei dem das Modell beginnt, sich das Rauschen im Trainingsset einzuprägen und dadurch Schwierigkeiten mit weiteren Testdaten entstehen können. Die Visualisierungen bestätigen dieses Verhalten: Die Vorhersagekurve des Overfit-Modells schmiegt sich stark an die Trainingspunkte an, verfehlt aber systematisch die Testdaten. Durch den Vergleich der Modelle wird deutlich, wie sensibel neuronale Netze auf Rauschen und Trainingsdauer reagieren und warum eine kontrollierte Modellkomplexität und passende Trainingszeit entscheidend sind. <br>
+
+<br>Aufgrund dessen, dass die Trainings- und Testdaten zufällig zugewiesen und generiert werden, kann es bei den Modellen (vor allem beim Overfitting) zu extremen Ergebnissen kommt, wenn zum Beispiel ein großer Teil der Start- oder Enddaten den Testdaten zugewiesen wird, da dadurch Teile der Kurve für das Training des Modells fehlen können. Hier ist daher ein Beispiel des Modells mit einer Darstellung des Overfittings bei dem sowohl das Ende als auch der Anfang der Kurve  durch die Trainingsdaten nicht erkannt wurde:
+        </p>
+        <div style="text-align:center; margin:2rem 0;">
+          <img src="r4.png" alt="Beispiel Overfitting" style="max-width:90%; height:auto; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+          <div style="font-size:1rem; color:#555; margin-top:0.5rem;">Beispiel Overfitting des Modells</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="column" style="max-width:700px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 2rem 2.5rem; margin-bottom: 2rem;">
+      <h2 style="text-align:center;">Technische Dokumentation</h2>
+      <div style="text-align:left;">
+        <p>
+          <b>TensorFlow.js:</b> Für das Erstellen, Trainieren und Anwenden des neuronalen Netzes.<br>
+          <b>Chart.js:</b> Für die Visualisierung der Datenpunkte und Modellvorhersagen in Diagrammen.<br>
+          <b>Eigenes JavaScript:</b> Für die Datenaufbereitung, das Hinzufügen von Rauschen und die Steuerung der Abläufe.
+        </p>
+        <p>
+          Die Anwendung erzeugt die Daten und trainiert die Modelle vollständig im Browser. Die Diagramme werden dynamisch erzeugt. Zum Trainieren werden nur Trainingsdaten verwendet.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="column" style="max-width:700px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 2rem 2.5rem; margin-bottom: 2rem;">
+      <h2 style="text-align:center;">Fachliche Dokumentation</h2>
+      <div style="text-align:left;">
+        <p><strong>Ansatz:</strong> Ziel war es, die Funktion <code>y(x) = 0.5*(x+0.8)*(x+1.8)*(x-0.2)*(x-0.3)*(x-1.9)+1</code> mithilfe eines Feed-Forward Neural Networks zu approximieren. Dazu wurden synthetische Datensätze generiert: je 100 x-Werte gleichmäßig verteilt im Intervall [-2, 2], mit den entsprechenden y-Werten. Diese wurden einmal direkt verwendet (unverrauscht) und einmal mit normalverteiltem Rauschen (Varianz 0.05) versehen. Anschließend wurden die Daten zufällig in Trainings- und Testdaten (je 50) aufgeteilt.</p>
+        <p><strong>Implementierung:</strong> Die FFNN-Architektur bestand aus zwei Hidden-Layern mit je 100 Neuronen (ReLU-Aktivierung) und einem linearen Output-Neuron. Optimiert wurde mit dem Adam-Optimizer (Lernrate 0.01, Batch-Größe 32) unter Verwendung des Mean-Squared-Error als Loss-Funktion. Für die drei Modelle (unverrauscht, Best-Fit, Over-Fit) wurden 200, 100 bzw. 1000 Epochen verwendet. Die Modelle wurden mit TensorFlow trainiert und werden beim Laden der HTML-Seite automatisch eingebunden. Die Vorhersagen sowie der Trainings- und Test-Loss werden direkt beim Seitenstart visualisiert.</p>
+        <p><strong>Resultate:</strong> Das Modell ohne Rauschen generalisierte nahezu perfekt (Loss_train ≈ Loss_test). Das Best-Fit-Modell zeigte bei verrauschten Daten eine gute Balance zwischen Anpassung und Generalisierung. Das Over-Fit-Modell dagegen overfittete erwartungsgemäß und zeigte stark abweichende Loss-Werte zwischen Train und Test. Alle Verläufe und Vorhersagen sind in Diagrammen visualisiert und farblich differenziert dargestellt.</p>
+        <p><strong>Quellen:</strong> Eigene Implementierung auf Basis der Aufgabenstellung. TensorFlow.js API-Dokumentation (<a href="https://js.tensorflow.org/api/latest/" target="_blank">js.tensorflow.org/api/latest</a>), StackOverflow-Beitrag zur Gauß-Verteilung in JavaScript, sowie das TensorFlow.js-Tutorial „Making predictions from 2d data“.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

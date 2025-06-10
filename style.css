@@ -1,0 +1,122 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f4f8;
+  margin: 0;
+  padding: 2rem 8vw; 
+  color: #222;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+h1, h2, h3 {
+  color: #003366;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 51, 102, 0.07);
+  text-align: center;
+}
+h1, h2 {
+  display: inline-block;
+  margin: 2rem auto 1.2rem auto;
+  text-align: center;
+  padding: 0.7rem 3rem 0.5rem 3rem;
+  border-radius: 18px 18px 0 0;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+
+h1 {
+  display: inline-block;
+  margin: 2rem auto 1.2rem auto;
+  font-size: 2.7rem;
+  letter-spacing: 3px;
+  border-bottom: 5px solid #1e90ff;
+  color: #1e355d;
+  font-weight: 900;
+  text-align: center;
+}
+
+body, .container, section, .column {
+  text-align: center;
+}
+h2 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  border-bottom: 3px solid #3a7bd5;
+  color: #225588;
+  font-weight: 800;
+  margin: 2rem 0 1.2rem 0;
+  text-shadow: 0 2px 8px rgba(58, 123, 213, 0.10);
+}
+
+h1:hover, h2:hover {
+  box-shadow: 0 8px 32px rgba(30, 51, 102, 0.18);
+  background: linear-gradient(90deg, #e0e7ef 0%, #f8fafc 100%);
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.7rem;
+  letter-spacing: 1.2px;
+  color: #3a7bd5;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(58, 123, 213, 0.07);
+}
+
+.column {
+  flex: 1;
+  min-width: 300px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  text-align: center; 
+}
+
+canvas {
+  width: 100% !important;
+  max-height: 300px;
+}
+
+p {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+section {
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem 2vw;
+  }
+  .container {
+    flex-direction: column;
+    max-width: 100%;
+  }
+}
+
+  canvas.chart-hover {
+    transition: box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-radius: 12px;
+  }
+  canvas.chart-hover:hover {
+    box-shadow: 0 8px 32px rgba(30, 51, 102, 0.18), 0 2px 12px rgba(0,0,0,0.08);
+    transform: scale(1.03);
+    z-index: 2;
+  }
